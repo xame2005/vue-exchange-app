@@ -1,19 +1,28 @@
 <template>
-    <div>
-        <px-assets-table/>
-    </div>
+  <div>
+    <px-assets-table v-bind:assets="assets" />
+  </div>
 </template>
 
 <script>
-import PxAssetsTable from "@/components/PxAssetsTable"
+import API from "@/api";
+import PxAssetsTable from "@/components/PxAssetsTable";
 
-    export default {
-        name: "Home",
+export default {
+  name: "Home",
 
-        components: { PxAssetsTable }
-    }
+  components: { PxAssetsTable },
+
+  data() {
+    return {
+      assets: []
+    };
+  },
+
+  created() {
+    API.getAssets().then(assets => (this.assets = assets));
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
